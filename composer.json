@@ -1,0 +1,23 @@
+{
+    "name": "fizzka/extractor",
+    "type": "library",
+    "description": "HTML Parser",
+    "keywords": ["html", "parse", "parser", "extractor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fizzka",
+            "email": "fizz@pisem.net",
+            "role": "developer"
+        }
+    ],
+	"require": {
+        "php": ">=5.2"
+    },
+    "autoload": {
+        "classmap": [
+        	"Extractor.php",
+        	"XpathSubquery.php"
+        ]
+    }
+}
