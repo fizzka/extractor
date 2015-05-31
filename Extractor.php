@@ -23,13 +23,22 @@ class Extractor extends SimpleXMLElement {
 		return $this->xpath(XpathSubquery::get($expression));
 	}
 
+	public function cssPathFirst($expression) {
+		$res = $this->cssPath($expression);
+		if (count($res)) {
+			return $res[0];
+		}
+
+		return false;
+	}
+
 	public function xpathFirst($xpathQuery) {
 		$res = $this->xpath($xpathQuery);
 		if (count($res)) {
 			return $res[0];
 		}
 
-		return $res;
+		return false;
 	}
 
 	/**
