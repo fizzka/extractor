@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="false"
+	convertWarningsToExceptions="true"
+	bootstrap="tests/bootstrap.php"
+>
+	<testsuite name="extractor">
+		<directory>./tests</directory>
+	</testsuite>
+
+	<filter>
+		<whitelist>
+			<directory suffix=".php">./library</directory>
+		</whitelist>
+	</filter>
+
+	<!-- <logging>
+		<log type="coverage-html" target="tests/log/coverage-html" charset="UTF-8" highlight="true" />
+	</logging> -->
+</phpunit>
