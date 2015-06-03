@@ -1,12 +1,12 @@
 <?php
 
-class Extractor extends SimpleXMLElement {
-
+class Extractor extends SimpleXMLElement
+{
 	public static function fromHtml($htmlString) {
 		$dom = new DOMDocument('1.0', 'UTF-8');
 		$dom->preserveWhiteSpace = false;
 
-		if (strlen($htmlString)){
+		if (strlen($htmlString)) {
 			libxml_use_internal_errors(true);
 			$dom->loadHTML($htmlString);
 			libxml_clear_errors();
