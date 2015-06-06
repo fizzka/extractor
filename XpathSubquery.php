@@ -6,7 +6,7 @@
 class XpathSubquery
 {
 	const REGEXP = "/(?P<tag>[a-z0-9]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS";
-	protected static $compiledXpath = [];
+	protected static $compiledXpath = array();
 
 	public static function get($expression, $rel = false, $compile = true) {
 		if ($compile) {
