@@ -1,6 +1,8 @@
 # extractor
 html extraction library, based on [SimpleXML](http://php.net/manual/en/book.simplexml.php) &amp; [nokogiri](https://github.com/olamedia/nokogiri) XpathSubquery.php
 
+[![Build Status](https://travis-ci.org/fizzka/extractor.svg)](https://travis-ci.org/fizzka/extractor)
+
 ## Benefits
 * Simple
 * Minimal code
