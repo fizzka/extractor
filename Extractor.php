@@ -2,6 +2,8 @@
 
 class Extractor extends SimpleXMLElement
 {
+	protected $isTopLevelElement = false;
+
 	public static function fromHtml($htmlString) {
 		$dom = new DOMDocument('1.0', 'UTF-8');
 		$dom->preserveWhiteSpace = false;
@@ -12,7 +14,9 @@ class Extractor extends SimpleXMLElement
 			libxml_clear_errors();
 		}
 
-		return static::fromDom($dom);
+		$ex = static::fromDom($dom);
+		$ex->isTopLevelElement = true;
+		return $ex;
 	}
 
 	public static function fromDom($dom) {
@@ -20,7 +24,8 @@ class Extractor extends SimpleXMLElement
 	}
 
 	public function cssPath($expression) {
-		return $this->xpath(XpathSubquery::get($expression));
+		$prefix = $this->isTopLevelElement ? '' : '.';
+		return $this->xpath($prefix . XpathSubquery::get($expression));
 	}
 
 	public function cssPathFirst($expression) {

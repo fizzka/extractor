@@ -30,6 +30,10 @@ var_dump($ex->get('a.habracut'));
 ## Advanced Usage
 ```php
 echo $ex->cssPathFirst('div.post')->xpathFirst('.//@href');
+
+foreach ($ex->cssPath('div.post') as $post) {
+	var_dump($post->cssPathFirst('a.post_title'));
+}
 ```
 
 ## Testing

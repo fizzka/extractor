@@ -6,11 +6,13 @@ class ExtractorTest extends PHPUnit_Framework_TestCase
 		$this->sut = Extractor::fromHtml(<<<HTML
 <html>
 	<body>
+		<span class="s1">foo</span>
 		<div class="c1">
 			<div>xxx</div>
 			<div>
 				<span>yyy</span>
 				<span>zzz</span>
+				<span class="s1">baz</span>
 			</div>
 		</div>
 	</body>
@@ -48,6 +50,18 @@ HTML
 		$this->assertEquals(
 			'yyy',
 			(string)$this->sut->cssPathFirst('div.c1')->xpathFirst('.//span')
+		);
+	}
+
+	public function testCssAfterCss() {
+		$this->assertNotEquals(
+			'foo',
+			(string)$this->sut->cssPathFirst('div.c1')->cssPathFirst('span.s1')
+		);
+
+		$this->assertEquals(
+			'baz',
+			(string)$this->sut->cssPathFirst('div.c1')->cssPathFirst('span.s1')
 		);
 	}
 
