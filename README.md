@@ -10,7 +10,8 @@ html extraction library, based on [SimpleXML](http://php.net/manual/en/book.simp
 
 ## Installation
 ```shell
-composer install/update
+#Using packagist:
+composer require 'fizzka/extractor'
 ```
 
 ## Basic Usage
@@ -34,3 +35,6 @@ Just run `phpunit` from the top of project
 
 ## Contribute
 Feel free to use & contribute ;)
+
+## License
+MIT
