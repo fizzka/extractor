@@ -1,8 +1,28 @@
 language: php
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - hhvm
+sudo: false
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.5
+    - php: 5.6
+      env:
+        - EXECUTE_TEST_COVERALLS=true
+    - php: 7
+    - php: hhvm
+  allow_failures:
+    - php: 7
+
+before_install:
+  - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+  - composer self-update
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
+
 install: composer install
+
+script:
+  - mkdir -p build/logs
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then phpunit --coverage-clover build/logs/clover.xml ; fi
+  - if [[ $EXECUTE_TEST_COVERALLS != 'true' ]]; then phpunit ; fi
+
+after_script:
+  - if [[ $EXECUTE_TEST_COVERALLS == 'true' ]]; then ./vendor/bin/coveralls ; fi
