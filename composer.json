@@ -11,13 +11,13 @@
             "role": "developer"
         }
     ],
-	"require": {
+    "require": {
         "php": ">=5.2"
     },
     "autoload": {
         "classmap": [
-        	"Extractor.php",
-        	"XpathSubquery.php"
+            "src/Extractor.php",
+            "src/XpathSubquery.php"
         ]
     }
 }
