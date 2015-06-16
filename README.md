@@ -2,6 +2,7 @@
 html extraction library, based on [SimpleXML](http://php.net/manual/en/book.simplexml.php) &amp; [nokogiri](https://github.com/olamedia/nokogiri) XpathSubquery.php
 
 [![Build Status](https://travis-ci.org/fizzka/extractor.svg)](https://travis-ci.org/fizzka/extractor)
+[![Coverage Status](https://coveralls.io/repos/fizzka/extractor/badge.svg)](https://coveralls.io/r/fizzka/extractor)
 
 ## Benefits
 * Simple
