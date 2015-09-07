@@ -59,4 +59,8 @@ class Extractor extends SimpleXMLElement
 	public function getElements($xpathQuery) {
 		return $this->xpath($xpathQuery);
 	}
+
+	public function innerText() {
+		return strip_tags($this->asXML());
+	}
 }
