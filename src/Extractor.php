@@ -8,11 +8,13 @@ class Extractor extends SimpleXMLElement
 		$dom = new DOMDocument('1.0', 'UTF-8');
 		$dom->preserveWhiteSpace = false;
 
-		if (strlen($htmlString)) {
-			libxml_use_internal_errors(true);
-			$dom->loadHTML($htmlString);
-			libxml_clear_errors();
+		if (!strlen($htmlString)) {
+			$htmlString = '<html></html>';
 		}
+
+		libxml_use_internal_errors(true);
+		$dom->loadHTML($htmlString);
+		libxml_clear_errors();
 
 		$ex = static::fromDom($dom);
 		$ex->isTopLevelElement = true;
