@@ -68,7 +68,7 @@ class XpathSubquery
                             $brackets[] = '(position() -' . $esubs['pos'] . ') mod '
                                 . $esubs['mul'] . ' = 0 and position() >= ' . $esubs['pos'] . '';
                         } else {
-                            $brackets[] = '' . $e . '';
+                            $brackets[] = $e;
                         }
                     }
                 }
