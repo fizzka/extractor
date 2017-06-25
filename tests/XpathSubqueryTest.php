@@ -2,32 +2,42 @@
 
 class XpathSubqueryTest extends PHPUnit_Framework_TestCase
 {
-	public function testNotRelative() {
-		$this->assertEquals(XpathSubquery::get('aaa bbb'), '//aaa//bbb');
-	}
+    public function testNotRelative()
+    {
+        $this->assertEquals(XpathSubquery::get('aaa bbb'), '//aaa//bbb');
+    }
 
-	public function testRelative() {
-		$this->assertEquals(XpathSubquery::get('aaa bbb', true), '/aaa//bbb');
-	}
+    public function testRelative()
+    {
+        $this->assertEquals(XpathSubquery::get('aaa bbb', true), '/aaa//bbb');
+    }
 
-	public function testId() {
-		$this->assertEquals(XpathSubquery::get('#yyy'), "//*[@id='yyy']");
-	}
+    public function testId()
+    {
+        $this->assertEquals(XpathSubquery::get('#yyy'), "//*[@id='yyy']");
+    }
 
-	public function testClass() {
-		$this->assertEquals(XpathSubquery::get('.yyy'), '//*[contains(concat(" ", normalize-space(@class), " "), " yyy ")]');
-	}
+    public function testClass()
+    {
+        $this->assertEquals(
+            XpathSubquery::get('.yyy'),
+            '//*[contains(concat(" ", normalize-space(@class), " "), " yyy ")]'
+        );
+    }
 
-	public function testAttr() {
-		$this->assertEquals(XpathSubquery::get('[xxx="yyy"]'), '//*[@xxx="yyy"]');
-	}
+    public function testAttr()
+    {
+        $this->assertEquals(XpathSubquery::get('[xxx="yyy"]'), '//*[@xxx="yyy"]');
+    }
 
-	public function testAttrPresent() {
-		$this->assertEquals(XpathSubquery::get('[xxx]'), '//*[@xxx]');
-	}
+    public function testAttrPresent()
+    {
+        $this->assertEquals(XpathSubquery::get('[xxx]'), '//*[@xxx]');
+    }
 
-	public function testPseudo() {
-		$this->assertEquals(XpathSubquery::get(':first-child'), '//*[1]');
-		$this->assertEquals(XpathSubquery::get(':last-child'), '//*[last()]');
-	}
+    public function testPseudo()
+    {
+        $this->assertEquals(XpathSubquery::get(':first-child'), '//*[1]');
+        $this->assertEquals(XpathSubquery::get(':last-child'), '//*[last()]');
+    }
 }
