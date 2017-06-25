@@ -13,11 +13,9 @@ class XpathSubquery
 
     public static function get($expression, $rel = false, $compile = true)
     {
-        if ($compile) {
-            $key = $expression . ($rel ? '>' : '*');
-            if (isset(self::$compiledXpath[$key])) {
-                return self::$compiledXpath[$key];
-            }
+        $key = $expression . ($rel ? '>' : '*');
+        if ($compile && isset(self::$compiledXpath[$key])) {
+            return self::$compiledXpath[$key];
         }
 
         $query = self::buildQuery($expression, $rel, $compile);
