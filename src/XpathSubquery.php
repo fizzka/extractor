@@ -7,32 +7,34 @@ class XpathSubquery
 {
     // @codingStandardsIgnoreLine
     const REGEXP = "/(?P<tag>[a-z0-9]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS";
-    protected static $compiledXpath = array();
+
+    protected static $compiledXpath = [];
 
     public static function get($expression, $rel = false, $compile = true)
     {
         if ($compile) {
-            $key = $expression.($rel?'>':'*');
+            $key = $expression . ($rel ? '>' : '*');
             if (isset(self::$compiledXpath[$key])) {
                 return self::$compiledXpath[$key];
             }
         }
+
         $query = '';
         if (preg_match(self::REGEXP, $expression, $subs)) {
-            $brackets = array();
+            $brackets = [];
             if (isset($subs['id']) && '' !== $subs['id']) {
-                $brackets[] = "@id='".$subs['id']."'";
+                $brackets[] = "@id='" . $subs['id'] . "'";
             }
             if (isset($subs['attr']) && '' !== $subs['attr']) {
                 if (!(isset($subs['value']))) {
-                    $brackets[] = "@".$subs['attr'];
+                    $brackets[] = "@" . $subs['attr'];
                 } else {
-                    $attrValue = !empty($subs['value'])?$subs['value']:'';
-                    $brackets[] = "@".$subs['attr']."='".$attrValue."'";
+                    $attrValue = !empty($subs['value']) ? $subs['value'] : '';
+                    $brackets[] = "@" . $subs['attr'] . "='" . $attrValue . "'";
                 }
             }
             if (isset($subs['class']) && '' !== $subs['class']) {
-                $brackets[] = 'contains(concat(" ", normalize-space(@class), " "), " '.$subs['class'].' ")';
+                $brackets[] = 'contains(concat(" ", normalize-space(@class), " "), " ' . $subs['class'] . ' ")';
             }
             if (isset($subs['pseudo']) && '' !== $subs['pseudo']) {
                 if ('first-child' === $subs['pseudo']) {
@@ -53,21 +55,21 @@ class XpathSubquery
                                 $brackets[] = '(position() -' . $esubs['pos'] . ') mod '
                                     . $esubs['mul'] . ' = 0 and position() >= ' . $esubs['pos'] . '';
                             } else {
-                                $brackets[] = ''.$e.'';
+                                $brackets[] = '' . $e . '';
                             }
                         }
                     }
                 }
             }
-            $query = ($rel?'/':'//').
-                ((isset($subs['tag']) && '' !== $subs['tag'])?$subs['tag']:'*').
-                (($c = count($brackets))?
-                    ($c>1?'[('.implode(') and (', $brackets).')]':'['.implode(' and ', $brackets).']')
-                :'')
+            $query = ($rel ? '/' : '//') .
+                ((isset($subs['tag']) && '' !== $subs['tag']) ? $subs['tag'] : '*') .
+                (($c = count($brackets)) ?
+                    ($c > 1 ? '[('.implode(') and (', $brackets) . ')]' : '[' . implode(' and ', $brackets) . ']')
+                : '')
                 ;
             $left = trim(substr($expression, strlen($subs[0])));
             if ('' !== $left) {
-                $query .= self::get($left, isset($subs['rel'])?'>'===$subs['rel']:false, $compile);
+                $query .= self::get($left, isset($subs['rel']) ? '>' === $subs['rel'] : false, $compile);
             }
         }
         if ($compile) {
