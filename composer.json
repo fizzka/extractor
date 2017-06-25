@@ -19,5 +19,8 @@
             "src/Extractor.php",
             "src/XpathSubquery.php"
         ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
     }
 }
