@@ -1,6 +1,6 @@
 <?php
 
-class ExtractorTest extends PHPUnit_Framework_TestCase
+class ExtractorTest extends PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

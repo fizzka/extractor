@@ -1,6 +1,6 @@
 <?php
 
-class XpathSubqueryTest extends PHPUnit_Framework_TestCase
+class XpathSubqueryTest extends PHPUnit\Framework\TestCase
 {
     public function testNotRelative()
     {
