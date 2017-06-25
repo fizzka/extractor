@@ -19,7 +19,19 @@ class XpathSubquery
             }
         }
 
+        $query = self::buildQuery($expression, $rel, $compile);
+
+        if ($compile) {
+            self::$compiledXpath[$key] = $query;
+        }
+
+        return $query;
+    }
+
+    private static function buildQuery($expression, $rel, $compile)
+    {
         $query = '';
+
         if (preg_match(self::REGEXP, $expression, $subs)) {
             $brackets = [];
             if (isset($subs['id']) && '' !== $subs['id']) {
@@ -72,9 +84,7 @@ class XpathSubquery
                 $query .= self::get($left, isset($subs['rel']) ? '>' === $subs['rel'] : false, $compile);
             }
         }
-        if ($compile) {
-            self::$compiledXpath[$key] = $query;
-        }
+
         return $query;
     }
 }
