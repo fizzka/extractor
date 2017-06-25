@@ -6,7 +6,7 @@
 class XpathSubquery
 {
     // @codingStandardsIgnoreLine
-    const REGEXP = "/(?P<tag>[a-z0-9]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS";
+    const REGEXP = "/(?P<tag>[a-z\d]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS";
 
     protected static $compiledXpath = [];
 
@@ -61,9 +61,9 @@ class XpathSubquery
                         $brackets[] = '(position() -1) mod 2 = 0 and position() >= 1';
                     } elseif ('even' === $e) {
                         $brackets[] = 'position() mod 2 = 0 and position() >= 0';
-                    } elseif (preg_match("/^[0-9]+$/", $e)) {
+                    } elseif (preg_match("/^\d+$/", $e)) {
                         $brackets[] = 'position() = ' . $e;
-                    } elseif (preg_match("/^((?P<mul>[0-9]+)n\+)(?P<pos>[0-9]+)$/is", $e, $esubs)) {
+                    } elseif (preg_match("/^((?P<mul>\d+)n\+)(?P<pos>\d+)$/is", $e, $esubs)) {
                         if (isset($esubs['mul'])) {
                             $brackets[] = '(position() -' . $esubs['pos'] . ') mod '
                                 . $esubs['mul'] . ' = 0 and position() >= ' . $esubs['pos'] . '';
