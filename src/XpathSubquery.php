@@ -5,8 +5,9 @@
  */
 class XpathSubquery
 {
-    // @codingStandardsIgnoreLine
-    const REGEXP = "/(?P<tag>[a-z\d]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS";
+    const REGEXP = '/(?P<tag>[a-z\d]+)?(\[(?P<attr>\S+)(=(?P<value>[^\]]+))?\])?'
+        . '(#(?P<id>[^\s:>#\.]+))?(\.(?P<class>[^\s:>#\.]+))?'
+        . '(:(?P<pseudo>(first|last|nth)-child)(\((?P<expr>[^\)]+)\))?)?\s*(?P<rel>>)?/isS';
 
     protected static $compiledXpath = [];
 
