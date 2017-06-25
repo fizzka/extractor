@@ -62,7 +62,7 @@ class XpathSubquery
                     } elseif ('even' === $e) {
                         $brackets[] = 'position() mod 2 = 0 and position() >= 0';
                     } elseif (preg_match("/^[0-9]+$/", $e)) {
-                        $brackets[] = 'position() = '.$e;
+                        $brackets[] = 'position() = ' . $e;
                     } elseif (preg_match("/^((?P<mul>[0-9]+)n\+)(?P<pos>[0-9]+)$/is", $e, $esubs)) {
                         if (isset($esubs['mul'])) {
                             $brackets[] = '(position() -' . $esubs['pos'] . ') mod '
@@ -75,12 +75,12 @@ class XpathSubquery
             }
         }
 
-        $query = ($rel ? '/' : '//') .
-            ((isset($subs['tag']) && '' !== $subs['tag']) ? $subs['tag'] : '*') .
-            (($c = count($brackets)) ?
-                ($c > 1 ? '[('.implode(') and (', $brackets) . ')]' : '[' . implode(' and ', $brackets) . ']')
-            : '')
-            ;
+        $query = ($rel ? '/' : '//')
+            . ((isset($subs['tag']) && '' !== $subs['tag']) ? $subs['tag'] : '*')
+            . (($c = count($brackets))
+                ? ($c > 1 ? '[(' . implode(') and (', $brackets) . ')]' : '[' . implode(' and ', $brackets) . ']')
+                : '');
+
         $left = trim(substr($expression, strlen($subs[0])));
         if ('' !== $left) {
             $query .= self::get($left, isset($subs['rel']) ? '>' === $subs['rel'] : false, $compile);
