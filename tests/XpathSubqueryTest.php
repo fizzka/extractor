@@ -40,5 +40,18 @@ class XpathSubqueryTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(XpathSubquery::get(':first-child'), '//*[1]');
         $this->assertEquals(XpathSubquery::get(':last-child'), '//*[last()]');
         $this->assertEquals(XpathSubquery::get(':nth-child(4)'), '//*[position() = 4]');
+
+        $this->assertEquals(
+            XpathSubquery::get(':nth-child(odd)'),
+            '//*[(position() -1) mod 2 = 0 and position() >= 1]'
+        );
+        $this->assertEquals(
+            XpathSubquery::get(':nth-child(even)'),
+            '//*[position() mod 2 = 0 and position() >= 0]'
+        );
+        $this->assertEquals(
+            XpathSubquery::get(':nth-child(5n+2)'),
+            '//*[(position() -2) mod 5 = 0 and position() >= 2]'
+        );
     }
 }
