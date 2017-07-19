@@ -8,7 +8,14 @@ pipelines:
         branch: test-go
     stages:
       - build: # name of stage
-          tasks:
-           - script: curl -sS https://getcomposer.org/installer | php
-           - script: php composer.phar install
-           - script: ./vendor/bin/phpunit
+          jobs:
+            - test:
+                tasks:
+                  - script: curl -sS https://getcomposer.org/installer | php
+                  - script: php composer.phar install
+                  - script: ./vendor/bin/phpunit --log-junit=junit.xml
+                # artifacts:
+                #   - test:
+                #      destination: target/
+                #tabs:
+                #  test: junit.xml
