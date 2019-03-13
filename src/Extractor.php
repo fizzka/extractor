@@ -27,9 +27,6 @@ class Extractor extends SimpleXMLElement
         return simplexml_import_dom($dom, get_class());
     }
 
-    /**
-     * @return static[]
-     */
     public function cssPath($expression)
     {
         $prefix = $this->isTopLevelElement ? '' : '.';
